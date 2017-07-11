@@ -8,7 +8,8 @@
                     <form #movieForm="ngForm" (ngSubmit)="addMovie(movieForm)" novalidate>
                         <div class="form-group">
                             <label> Image URL </label>
-                            <input type="text" class="form-control" [(ngModel)]="currentMovie.imageUrl" name="imageUrl" #refUrl="ngModel"   placeholder="Image URL e.g https://upload.wikimedia.org/wikipedia/en/0/04/Tubelight_Poster.jpg" required>
+                            <input type="text" class="form-control" [(ngModel)]="currentMovie.imageUrl" name="imageUrl" #refUrl="ngModel" 
+                            placeholder="Image URL e.g https://upload.wikimedia.org/wikipedia/en/0/04/Tubelight_Poster.jpg" required>
                             <!-- Field Validation-->
                             <div *ngIf="refUrl.errors && (refUrl.dirty || refUrl.touched)"  class="alert alert-danger" >
                             <div [hidden]="!refUrl.errors.required">
@@ -18,21 +19,31 @@
                         </div>
                         <div class="form-group">
                             <label> Movie Name </label>
-                            <input type="text" class="form-control" name="name"  #refName="ngModel" [(ngModel)]="currentMovie.name"  placeholder="Movie Name" required>
+                            <input type="text" class="form-control" name="name"  #refName="ngModel" [(ngModel)]="currentMovie.name"  
+                            pattern="^[a-zA-Z0-9]*$"  placeholder="Movie Name" required>
                             <!-- Field Validation-->
                             <div *ngIf="refName.errors && (refName.dirty || refName.touched)" class="alert alert-danger" >
                             <div [hidden]="!refName.errors.required">
                                 Name Required
                             </div>
+                            <!--Alpha Numeric validation -->
+                             <div [hidden]="!refName.errors.pattern">
+                               Enter Alpha Numeric values only
+                            </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label> Movie Description </label>
-                            <input type="text" class="form-control" name="description" #refDesc="ngModel" [(ngModel)]="currentMovie.description"  placeholder="Moview Description" required>
+                            <input type="text" class="form-control" name="description" #refDesc="ngModel" [(ngModel)]="currentMovie.description"  
+                            pattern="^[a-zA-Z]*$" placeholder="Moview Description" required>
                             <!-- Field Validation-->
                             <div *ngIf="refDesc.errors && (refDesc.dirty || refDesc.touched)" class="alert alert-danger">
                             <div [hidden]="!refDesc.errors.required">
                                 Description Required
+                            </div>
+                            <!--Alphabets validation -->
+                            <div [hidden]="!refDesc.errors.pattern">
+                               Enter Alphabets only
                             </div>
                             </div>
                         </div>
